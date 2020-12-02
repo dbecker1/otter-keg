@@ -1,19 +1,29 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { useFirebaseConnect } from 'react-redux-firebase'
+import { BrowserRouter, Link, Route } from "react-router-dom";
 
 function App() {
-    useFirebaseConnect([
-        { path: 'admin' }
-    ])
-    const data = useSelector(state => state.firebase)
-    console.log("Data", data)
     return (
-        <div>
-            <h1>Admin</h1>
-            {JSON.stringify(data.data.admin, null, 2)}
-        </div>
+        <BrowserRouter>
+            <Link to={"/view"}>View</Link>
+            <Link to={"/admin"}>Admin</Link>
+            <Route path={"/admin"} component = {Admin} />
+            <Route path={"/view"} component = {View} />
+        </BrowserRouter>
+    )
+
+}
+
+const Admin = () => {
+    return (
+        <p>Admin</p>
     )
 }
+
+const View = () => {
+    return (
+        <p>View</p>
+    )
+}
+
 
 export default App;

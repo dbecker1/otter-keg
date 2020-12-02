@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useFirebaseConnect } from 'react-redux-firebase'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useFirebaseConnect([
+        { path: 'admin' }
+    ])
+    const data = useSelector(state => state.firebase)
+    console.log("Data", data)
+    return (
+        <div>
+            <h1>Admin</h1>
+            {JSON.stringify(data.data.admin, null, 2)}
+        </div>
+    )
 }
 
 export default App;

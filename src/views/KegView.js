@@ -20,11 +20,11 @@ function KevView({admin}) {
             <Row style={{textAlign: "center"}}>
                 <Col sm={12} md={6} style={{paddingTop: "15%"}}>
                     <h1>{beers[0].name}</h1>
-                    <img src={beers[0].image} style={{width:  "70%"}}/>
+                    <img src={beers[0].image} style={{width:  "70%"}} alt={beers[0].name}/>
                 </Col>
                 <Col sm={12} md={6} style={{paddingTop: "15%"}}>
                     <h1>{beers[1].name}</h1>
-                    <img src={beers[1].image} style={{width:  "70%"}}/>
+                    <img src={beers[1].image} style={{width:  "70%"}} alt={beers[0].name}/>
                 </Col>
             </Row>
         </Container>

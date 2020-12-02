@@ -8,7 +8,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import  'firebase/database'
 import 'firebase/storage'
-import { createStore, combineReducers, compose } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     ReactReduxFirebaseProvider,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route } from "react-router-dom";
-import {OtterKeg }from "./components/OtterKeg";
+import {OtterKeg }from "./components/otter-keg/OtterKeg";
 
 function App() {
     return (
@@ -11,7 +11,6 @@ function App() {
             </Route>
         </BrowserRouter>
     )
-
 }
 
 export default App;

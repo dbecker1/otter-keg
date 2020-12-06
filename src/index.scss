@@ -1,3 +1,5 @@
+@import "../node_modules/@blueprintjs/core/lib/scss/variables.scss";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +7,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: $pt-dark-app-background-color;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 code {

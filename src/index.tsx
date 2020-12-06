@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import { Provider } from 'react-redux'
 import firebase from 'firebase/app'
@@ -14,6 +14,9 @@ import {
 import {
     OtterKegReducer, initialOtterKegState
 } from "./state/OtterKegState"
+import "normalize.css";
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC5xINCCmZAtz4mgr5_1xSwn9C63y6maTw",
@@ -40,6 +43,10 @@ const rrfProps = {
     dispatch: store.dispatch
     // createFirestoreInstance // <- needed if using firestore
 };
+
+document.body.className = "bp3-dark";
+
+console.log("help");
 
 ReactDOM.render(
   <React.StrictMode>

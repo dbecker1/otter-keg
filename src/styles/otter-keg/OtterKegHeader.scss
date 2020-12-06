@@ -1,0 +1,8 @@
+@import "../../../node_modules/@blueprintjs/core/lib/scss/variables.scss";
+
+.otter-keg-header {
+    width: 100%;
+    padding: 10px;
+    border-bottom: solid 2px $pt-dark-divider-white;
+    font-size: $pt-grid-size * 2;
+}

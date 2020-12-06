@@ -3,4 +3,13 @@
 .board {
     padding: 20px;
     border-left: 2px solid $pt-dark-divider-white;
+
+    .header {
+        font-size: $pt-font-size-large;
+        margin-bottom: 5px;
+    }
+
+    .user {
+        margin-bottom: 3px;
+    }
 }

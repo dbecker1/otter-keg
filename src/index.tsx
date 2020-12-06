@@ -2,18 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import  'firebase/database'
 import 'firebase/storage'
-import { createStore, combineReducers } from 'redux'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { createStore } from 'redux'
 import {
     ReactReduxFirebaseProvider,
-    firebaseReducer
-} from 'react-redux-firebase'
+} from 'react-redux-firebase';
+import {
+    OtterKegReducer, initialOtterKegState
+} from "./state/OtterKegState"
 
 const firebaseConfig = {
     apiKey: "AIzaSyC5xINCCmZAtz4mgr5_1xSwn9C63y6maTw",
@@ -31,14 +31,8 @@ const rrfConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-const rootReducer = combineReducers({
-    firebase: firebaseReducer
-    // firestore: firestoreReducer // <- needed if using firestore
-});
 
-// Create store with reducers and initial state
-const initialState = {};
-const store = createStore(rootReducer, initialState)
+const store = createStore(OtterKegReducer, initialOtterKegState)
 
 const rrfProps = {
     firebase,
@@ -57,8 +51,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

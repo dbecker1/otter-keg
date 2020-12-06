@@ -1,12 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Route } from "react-router-dom";
-import KegView from "./views/KegView";
+import {OtterKeg }from "./components/OtterKeg";
 
 function App() {
     return (
         <BrowserRouter>
             <Route path={"/admin"} render={() => {return <p>Admin</p>}} />
-            <Route path={"/view"} component = {KegView} />
+            <Route path={"/view"}>
+                <OtterKeg />
+            </Route>
         </BrowserRouter>
     )
 

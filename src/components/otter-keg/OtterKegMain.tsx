@@ -34,7 +34,7 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
         {Object.entries(kegs).map(([id, beer]) => {
             let details: any = beerDetails![beer.beerId.untappedBid]
             if (details === undefined) {
-                return;
+                return <></>;
             }
             return <div key={id}>{details.beer_name}</div>
         })}

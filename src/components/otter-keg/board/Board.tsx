@@ -10,7 +10,7 @@ export const Board = React.memo(function Board() {
     useFirebaseConnect("drinkers");
 
     const shouldShowLeaderBoard = useSelector((state: OtterKegState) => state.firebase.data.config?.showLeadership ?? {});
-    const leadershipBoardUpdateTime = useSelector((state: OtterKegState) => state.firebase.data.config?.leaderboardDuration ?? 0);
+    // const leadershipBoardUpdateTime = useSelector((state: OtterKegState) => state.firebase.data.config?.leaderboardDuration ?? 0);
     const drinkers = useSelector((state: OtterKegState) => state.firebase.data.drinkers);
 
     // TODO leader board

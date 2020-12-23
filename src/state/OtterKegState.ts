@@ -9,4 +9,5 @@ export const OtterKegReducer = combineReducers({
 export type OtterKegState = ReturnType<typeof OtterKegReducer>;
 
 // (mbrickell) Would rather have an actual defined initial states
+// (dbecker) we all want things in life madeleine 
 export const initialOtterKegState = {};

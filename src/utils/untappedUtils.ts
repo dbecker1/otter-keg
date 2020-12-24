@@ -25,5 +25,18 @@ function get(path: String): Promise<any> {
 }
 
 export function getBeerDetails(bid: String): Promise<any> {
-    return get("/beer/info/" + bid);
+    return new Promise((resolve, reject) => {
+        let key = "/beer/info/" + bid
+        let cachedResponse = localStorage.getItem(key);
+        if (!!cachedResponse) {
+            console.log("Fetching Untappd API request from cache:  ", key);
+            resolve(JSON.parse(cachedResponse));
+        } else {
+            console.log("Calling Untappd API: ", key);
+            get(key).then(response => {
+                localStorage.setItem(key, JSON.stringify(response));
+                resolve(response);
+            })
+        }
+    })
 }

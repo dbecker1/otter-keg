@@ -17,7 +17,6 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
 
     useDeepCompareEffect(() => {
         let promises = Object.entries(kegs).map(([id, keg]) => getBeerDetails(keg.beerId.untappedBid))
-        console.log("Calling uptappd api")
         Promise.all(promises).then(details => {
             let newBeerDetails: any = {}
             details.forEach((beerResponse: any) => {
@@ -34,7 +33,7 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
         {Object.entries(kegs).map(([id, beer]) => {
             let details: any = beerDetails![beer.beerId.untappedBid]
             if (details === undefined) {
-                return <></>;
+                return null;
             }
             return <div key={id}>{details.beer_name}</div>
         })}

@@ -32,8 +32,8 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                 newKegsWithDetails.push(kegWithDetails);
             });
             newKegsWithDetails.sort((a: any, b: any) => {
-                let aValue = a.position == "left" ? 1 : a.position == "right" ? 2 : 3;
-                let bValue = b.position == "left" ? 1 : b.position == "right" ? 2 : 3;
+                let aValue = a.position === "left" ? 1 : a.position === "right" ? 2 : 3;
+                let bValue = b.position === "left" ? 1 : b.position === "right" ? 2 : 3;
                 return aValue - bValue;
             })
             setKegsWithDetails(newKegsWithDetails);

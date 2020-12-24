@@ -6,11 +6,7 @@ import { Spinner } from "@blueprintjs/core";
 import { getBeerDetails } from "../../utils/untappedUtils";
 import "../../styles/otter-keg/OtterKegMain.scss";
 import useDeepCompareEffect from 'use-deep-compare-effect'
-
-const positionValues: any = {
-    "left": 1,
-    "right":  2
-}
+import { KegView } from "./KegView";
 
 export const OtterKegMain = React.memo(function OtterKegMain() {
     const [kegsWithDetails, setKegsWithDetails] = React.useState<any []>([]);
@@ -36,8 +32,8 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                 newKegsWithDetails.push(kegWithDetails);
             });
             newKegsWithDetails.sort((a: any, b: any) => {
-                let aValue = positionValues[a.position] || 3;
-                let bValue = positionValues[b.position] || 3;
+                let aValue = a.position == "left" ? 1 : a.position == "right" ? 2 : 3;
+                let bValue = b.position == "left" ? 1 : b.position == "right" ? 2 : 3;
                 return aValue - bValue;
             })
             setKegsWithDetails(newKegsWithDetails);
@@ -49,7 +45,7 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
     return kegsWithDetails.length > 0 ? <div className={"otter-keg-main"}>
         <div className={"beers"}>
         {kegsWithDetails.map((keg, index) => {
-            return <div key={index}>{keg.beer.beer_name}</div>
+            return <KegView keg={keg} key={index} />
         })}
         </div>
     </div> : <Spinner />

@@ -7,9 +7,11 @@ import { getBeerDetails } from "../../utils/untappedUtils";
 import "../../styles/otter-keg/OtterKegMain.scss";
 import useDeepCompareEffect from 'use-deep-compare-effect'
 import { KegView } from "./KegView";
+import { Beer } from "../../types/GetBeerDetailsResponse";
+import { KegWithDetails } from "../../types/KegWithDetails";
 
 export const OtterKegMain = React.memo(function OtterKegMain() {
-    const [kegsWithDetails, setKegsWithDetails] = React.useState<any []>([]);
+    const [kegsWithDetails, setKegsWithDetails] = React.useState<KegWithDetails []>([]);
     const populates = [{ child: "beerId", root: "beers"}];
 
     useFirebaseConnect([{path: "kegs", populates, queryParams: [ 'orderByChild=isActive', 'equalTo=true' ]}]);
@@ -19,15 +21,15 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
     useDeepCompareEffect(() => {
         let promises = Object.entries(kegs).map(([id, keg]) => getBeerDetails(keg.beerId.untappedBid))
         Promise.all(promises).then(beerDetails => {
-            let newKegsWithDetails: any[] = []
+            let newKegsWithDetails: KegWithDetails[] = []
             Object.keys(kegs).forEach((kegId: string) => {
                 // maddie typescript made me do this i hate typescript why did you make me use it ugh
                 let dumbTypescriptKegs: any = kegs;
                 let keg: any = dumbTypescriptKegs[kegId];
-                let kegWithDetails = {
+                let kegWithDetails: KegWithDetails = {
                     "position": keg.position,
                     "kegId": kegId,
-                    "beer": beerDetails.filter((beer: any) => {return beer.response.beer.bid === keg.beerId.untappedBid})[0].response.beer
+                    "beerDetails": beerDetails.filter((beer: Beer) => {return beer.bid === keg.beerId.untappedBid})[0]
                 };
                 newKegsWithDetails.push(kegWithDetails);
             });
@@ -45,7 +47,7 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
     return kegsWithDetails.length > 0 ? <div className={"otter-keg-main"}>
         <div className={"beers"}>
         {kegsWithDetails.map((keg, index) => {
-            return <KegView keg={keg} key={index} />
+            return <KegView keg={keg} key={index}/>
         })}
         </div>
     </div> : <Spinner />

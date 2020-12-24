@@ -1,4 +1,4 @@
-﻿export interface UntappdResponse {
+﻿export interface GetBeerDetailsResponse {
   meta: Meta;
   notifications?: (null)[] | null;
   response: Response;

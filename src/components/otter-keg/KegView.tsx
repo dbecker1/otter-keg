@@ -1,6 +1,10 @@
 import * as React from "react";
+import { KegWithDetails } from "../../types/KegWithDetails";
 
-export const KegView = React.memo(function KegView(props: React.PropsWithChildren<any>) {
-    let keg: any = props.keg;
-    return <div>{keg.beer.beer_name}</div>
+interface KevViewProps {
+    keg: KegWithDetails
+}
+
+export const KegView = React.memo(function KegView({keg} : KevViewProps) {
+    return <div>{keg.beerDetails.beer_name}</div>
 })

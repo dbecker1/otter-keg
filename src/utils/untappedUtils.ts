@@ -1,4 +1,4 @@
-import { BeerProxy, UntappdResponseProxy } from "../types/UntappdResponse";
+import { Beer, GetBeerDetailsResponse } from "../types/GetBeerDetailsResponse";
 
 const base_url = "https://api.untappd.com/v4"
 const client_id = "C8305503E9B12A5EBC3829BDEF8C547A2572EF2D"
@@ -53,10 +53,10 @@ function getCached(path: string): Promise<any> {
     }
 }
 
-export function getBeerDetails(bid: String): Promise<BeerProxy> {
+export function getBeerDetails(bid: String): Promise<Beer> {
     return getCached("/beer/info/" + bid).then((rawResponse: any) => {
-        let response : UntappdResponseProxy = UntappdResponseProxy.Create(rawResponse);
-        let beer = response.response.beer;
+        let response : GetBeerDetailsResponse = rawResponse as GetBeerDetailsResponse;
+        let beer: Beer = response.response.beer;
         return Promise.resolve(beer);
     })
 }

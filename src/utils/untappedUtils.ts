@@ -1,4 +1,5 @@
 import { Beer, GetBeerDetailsResponse } from "../types/GetBeerDetailsResponse";
+import { KegWithDetails } from "../types/KegWithDetails";
 
 const base_url = "https://api.untappd.com/v4"
 const client_id = "C8305503E9B12A5EBC3829BDEF8C547A2572EF2D"
@@ -59,4 +60,29 @@ export function getBeerDetails(bid: String): Promise<Beer> {
         let beer: Beer = response.response.beer;
         return Promise.resolve(beer);
     })
+}
+
+
+export function populateKegDetails(kegs: any[]) : Promise<KegWithDetails[]> {
+    let promises = Object.entries(kegs).map(([id, keg]) => getBeerDetails(keg.beerId.untappedBid))
+    return Promise.all(promises).then(beerDetails => {
+        let newKegsWithDetails: KegWithDetails[] = []
+        Object.keys(kegs).forEach((kegId: string) => {
+            // maddie typescript made me do this i hate typescript why did you make me use it ugh
+            let dumbTypescriptKegs: any = kegs;
+            let keg: any = dumbTypescriptKegs[kegId];
+            let kegWithDetails: KegWithDetails = {
+                "position": keg.position,
+                "kegId": kegId,
+                "beerDetails": beerDetails.filter((beer: Beer) => {return beer.bid === keg.beerId.untappedBid})[0]
+            };
+            newKegsWithDetails.push(kegWithDetails);
+        });
+        newKegsWithDetails.sort((a: any, b: any) => {
+            let aValue = a.position === "left" ? 1 : a.position === "right" ? 2 : 3;
+            let bValue = b.position === "left" ? 1 : b.position === "right" ? 2 : 3;
+            return aValue - bValue;
+        })
+        return Promise.resolve(newKegsWithDetails);
+    });
 }

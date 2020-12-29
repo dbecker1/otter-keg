@@ -4,13 +4,56 @@
     width: 100%;
     height: 100%;
 
-    .beers {
+    .keg-details {
         width: 100%;
         height: 100%;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: flex-start;
         padding: 10px;
-        text-align: center
+    }
+
+    .keg-details-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around
+    }
+    
+    .keg-details-row.header {
+        height: 20%;
+    }
+
+    .keg-details-row.image {
+        height: 40%;
+    }
+
+    .keg-details-row.footer {
+        height: 40%;
+    }
+
+    .keg-details-col {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        p.beer-title {
+            font-size: 2em;
+        }
+
+        img.beer-logo {
+            height: 100%;
+        }
+
+        p.beer-description {
+            font-style: italic;
+            max-height: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 10px;
+        }
     }
 }

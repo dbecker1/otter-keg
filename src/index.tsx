@@ -7,13 +7,10 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import  'firebase/database'
 import 'firebase/storage'
-import { createStore } from 'redux'
 import {
     ReactReduxFirebaseProvider,
 } from 'react-redux-firebase';
-import {
-    OtterKegReducer, initialOtterKegState
-} from "./state/OtterKegState"
+import { store } from "./state/OtterKegState"
 import "normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
 import "@blueprintjs/icons/lib/css/blueprint-icons.css";
@@ -35,7 +32,10 @@ const rrfConfig = {
 firebase.initializeApp(firebaseConfig)
 
 
-const store = createStore(OtterKegReducer, initialOtterKegState)
+// const store = createStore(
+//     OtterKegReducer, 
+//     initialOtterKegState,
+//     (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
 
 const rrfProps = {
     firebase,

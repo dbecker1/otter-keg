@@ -10,7 +10,6 @@ import { KegStats } from "./KegStats";
 export const OtterKegMain = React.memo(function OtterKegMain() {
     let activeKegs: KegWithDetails[] = useSelector((state: OtterKegState) => state.activeKegs) || {};
 
-    console.log("Kegs With Details: ", activeKegs)
     return activeKegs.length > 0 ? <div className={"otter-keg-main"}>
         <div className={"keg-details"}>
             <div className="keg-details-row header">

@@ -24,7 +24,10 @@ export const Board = React.memo(function Board() {
     useFirebaseConnect("config");
     useFirebaseConnect("drinkers");
     // this probably isn't a good idea ¯\_(ツ)_/¯
-    useFirebaseConnect("pours")
+    useFirebaseConnect([{
+        path: "pours", 
+        queryParams: [ 'orderByChild=isCurrent', "equalTo=false" ],
+    }]);
 
     const shouldShowLeaderBoard = useSelector((state: OtterKegState) => state.firebase.data.config?.showLeaderboard ?? {});
     // const leadershipBoardUpdateTime = useSelector((state: OtterKegState) => state.firebase.data.config?.leaderboardDuration ?? 0);

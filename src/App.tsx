@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { populate, useFirebaseConnect } from 'react-redux-firebase';
 import { BrowserRouter, Route } from "react-router-dom";
 import useDeepCompareEffect from 'use-deep-compare-effect';

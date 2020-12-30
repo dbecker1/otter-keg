@@ -11,8 +11,8 @@ export const OtterKeg = React.memo(function OtterKeg() {
             <OtterKegHeader />
             <div className="otter-keg-body">
                 <OtterKegMain />
-                <Board />
             </div>
+            <Board />
         </React.Fragment>
         
     )

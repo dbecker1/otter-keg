@@ -4,6 +4,7 @@ import { OtterKegState } from "../../state/OtterKegState";
 import { Spinner } from "@blueprintjs/core";
 import "../../styles/otter-keg/OtterKegMain.scss";
 import { KegWithDetails } from "../../types/KegWithDetails";
+import { PourOverlay } from "./PourOverlay";
 
 export const OtterKegMain = React.memo(function OtterKegMain() {
     let activeKegs: KegWithDetails[] = useSelector((state: OtterKegState) => state.activeKegs) || {};
@@ -35,7 +36,6 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                 })}
             </div>
         </div>
-
-        
+        <PourOverlay />
     </div> : <Spinner />
 })

@@ -25,36 +25,27 @@ const firebaseConfig = {
     appId: "1:1034936297122:web:85c0461a584fa92fd699fb"
 };
 
-const rrfConfig = {
-    userProfile: 'users'
-}
-
 firebase.initializeApp(firebaseConfig)
-
-
-// const store = createStore(
-//     OtterKegReducer, 
-//     initialOtterKegState,
-//     (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
 
 const rrfProps = {
     firebase,
-    config: rrfConfig,
+    config: {
+        userProfile: 'users'
+    },
     dispatch: store.dispatch
-    // createFirestoreInstance // <- needed if using firestore
 };
 
 document.body.className = "bp3-dark";
 
-console.log("help");
-
+// disabling strict mode because blueprint sucks and dumps a million
+// warnings to the console
 ReactDOM.render(
-  <React.StrictMode>
+//   <React.StrictMode>
       <Provider store={store}>
           <ReactReduxFirebaseProvider {...rrfProps}>
               <App />
           </ReactReduxFirebaseProvider>
-      </Provider>
-  </React.StrictMode>,
+      </Provider>,
+//   </React.StrictMode>,
   document.getElementById('root')
 );

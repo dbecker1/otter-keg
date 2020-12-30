@@ -1,0 +1,22 @@
+.overlay-container {
+    left: calc(50vw - 250px);
+    top: 20vh;
+    height: 60vh;
+    width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+
+    .title { 
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+
+    .amount {
+        font-size: 10em;
+        line-height: .9em;
+        margin-bottom: 0px;
+    }
+}

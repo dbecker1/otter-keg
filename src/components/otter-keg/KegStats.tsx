@@ -5,7 +5,6 @@ import { OtterKegState } from "../../state/OtterKegState";
 import "../../styles/otter-keg/KegStats.scss";
 import { KegWithDetails } from  "../../types/KegWithDetails"
 import Numeral from "numeral";
-import { Spinner } from "@blueprintjs/core";
 
 interface KegStatsProps {
     keg: KegWithDetails

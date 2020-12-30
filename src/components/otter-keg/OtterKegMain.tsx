@@ -5,6 +5,7 @@ import { Spinner } from "@blueprintjs/core";
 import "../../styles/otter-keg/OtterKegMain.scss";
 import { KegWithDetails } from "../../types/KegWithDetails";
 import { PourOverlay } from "./PourOverlay";
+import { KegStats } from "./KegStats";
 
 export const OtterKegMain = React.memo(function OtterKegMain() {
     let activeKegs: KegWithDetails[] = useSelector((state: OtterKegState) => state.activeKegs) || {};
@@ -31,7 +32,7 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
             <div className="keg-details-row footer">
                 {activeKegs.map((keg, index) => {
                     return <div className="keg-details-col" key={index}>
-                        <p className="beer-description">{keg.beerDetails.beer_description}</p>
+                        <KegStats keg={keg} />
                     </div>
                 })}
             </div>

@@ -74,6 +74,7 @@ export function populateKegDetails(kegs: any[]) : Promise<KegWithDetails[]> {
             let kegWithDetails: KegWithDetails = {
                 "position": keg.position,
                 "kegId": kegId,
+                "sizeInPints": keg.sizeInPints,
                 "beerDetails": beerDetails.filter((beer: Beer) => {return beer.bid === keg.beerId.untappedBid})[0]
             };
             newKegsWithDetails.push(kegWithDetails);

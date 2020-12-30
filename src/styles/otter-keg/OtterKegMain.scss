@@ -10,6 +10,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        align-items: stretch;
         padding: 10px;
     }
 
@@ -37,8 +38,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: center; 
         text-align: center;
+        border-left: solid 2px $pt-dark-divider-white;
+        margin-left: -1px;
 
         p.beer-title {
             font-size: 2em;
@@ -55,5 +58,10 @@
             text-overflow: ellipsis;
             padding: 10px;
         }
+    }
+
+    .keg-details-col:nth-child(1) {
+        border-left: none !important;
+        margin-left: 0px !important;
     }
 }

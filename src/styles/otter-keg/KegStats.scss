@@ -1,0 +1,31 @@
+
+
+.keg-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .stat {
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .stat-value {
+            font-size: 60px;
+            line-height: 70px;
+        }
+
+        .stat-title {
+            font-size: 16px;
+            line-height: 16px;
+        }
+    }
+}

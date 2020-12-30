@@ -5,4 +5,14 @@
     padding: 10px;
     border-bottom: solid 2px $pt-dark-divider-white;
     font-size: $pt-grid-size * 2;
+    height: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+        height: 30px;
+    }
 }

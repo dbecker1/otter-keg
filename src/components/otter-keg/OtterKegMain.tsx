@@ -6,6 +6,7 @@ import "../../styles/otter-keg/OtterKegMain.scss";
 import { KegWithDetails } from "../../types/KegWithDetails";
 import { PourOverlay } from "./PourOverlay";
 import { KegStats } from "./KegStats";
+import { populateKegDetails } from "../../utils/untappedUtils";
 
 export const OtterKegMain = React.memo(function OtterKegMain() {
     let activeKegs: KegWithDetails[] = useSelector((state: OtterKegState) => state.activeKegs) || {};
@@ -16,7 +17,7 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                 {activeKegs.map((keg, index) => {
                     return <div className="keg-details-col" key={index}>
                         <p className="beer-title">{keg.beerDetails.beer_name}</p>
-                        <p>{keg.beerDetails.beer_style}</p>
+                        <p>{keg.beerDetails.beer_style}<br />{keg.beerDetails.brewery.brewery_name}</p>
                     </div>
                 })}
             </div>

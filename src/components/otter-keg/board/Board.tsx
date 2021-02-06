@@ -84,7 +84,7 @@ export const Board = React.memo(function Board() {
     // TODO leader board
     return !!drinkers && !!pours ? <div className="board">
         {drinkers.map((drinker: any, index: any) => {
-            return <div className="drinker" key={index}>
+            return <div className={drinker.isActive ? 'drinker drinker-active' : 'drinker'} key={index}>
                 <p className="name">{shouldShowLeaderBoard ? `${index + 1}. ${drinker.name}` : drinker.name}</p>
                 <p className="volume">{shouldShowLeaderBoard ? `Total: ${drinker.pourVolume.toFixed(2)} pints`: ""}</p>
                 <p className="status">{drinker.isActive ? "Selected": '\u00A0'}</p>

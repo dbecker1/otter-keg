@@ -1,51 +1,35 @@
+import * as React from "react";
 import { Classes, Overlay } from "@blueprintjs/core";
 import classNames from "classnames";
-import * as React from "react";
-import { useSelector } from "react-redux";
-import { populate, useFirebaseConnect } from "react-redux-firebase";
-import { OtterKegState } from "../../state/OtterKegState";
-import { KegWithDetails } from "../../types/KegWithDetails";
-import "../../styles/otter-keg/PourOverlay.scss";
 
-const POUR_END_TIME_THRESHOLD = 10
+interface PourOverlayProps{
+    pour: any;
+    keg: any;
+}
+
 const LITERS_TO_PINTS = 2.11338;
 
-export const PourOverlay = React.memo(function PourOverlay() {
-    const kegs: KegWithDetails[] = useSelector((state: OtterKegState) => state.activeKegs);
-    const populates = [{ child: "drinkerId", root: "drinkers"}];
+export const  PourOverlay = React.memo(function PourOverlay(props: PourOverlayProps){
+    const { pour, keg } = props;
+    const { isCurrent, drinkerId: drinker, amount } = pour;
 
-    useFirebaseConnect([{
-        path: "pours", 
-        populates, 
-        queryParams: [ 'orderByChild=lastUpdate', 'limitToLast=1' ],
-        storeAs: "latestPour"
-    }]);
-    let pourRaw: any = useSelector((state: OtterKegState) => populate(state.firebase, "latestPour", populates));
+    const [shouldShowPourOverlay, setShouldShowPourOverlay] = React.useState<boolean>(false);
 
-    if (!pourRaw) {
-        return <span style={{display: "none"}}>No Pour</span>;
-    }
+    React.useEffect(() => {
+        if (isCurrent) {
+            setShouldShowPourOverlay(true);
+        } else if  (!isCurrent) {
+            setTimeout(() => setShouldShowPourOverlay(false), 10000)
+        }
+    }, [isCurrent])
 
-    let pour = pourRaw[Object.keys(pourRaw)[0]];
-    
-    let pourUpdate = new Date(pour.lastUpdate);
-    let now =  new Date();
-    // for local testing, enter a date less than 10 seconds after an existing pour
-    // let now = new Date("2020-12-17T13:47:38.160438")
-    let drinker = pour.drinkerId;
-    let withinThreshold = (now.getTime() - pourUpdate.getTime()) / 1000 < POUR_END_TIME_THRESHOLD;
-    let keg = kegs.filter((keg:KegWithDetails) => keg.kegId === pour.kegId)[0];
-
-    let overlayClasses = classNames(
-        Classes.CARD,
-        Classes.ELEVATION_4,
-        "overlay-container"
-    )
-    let amountInPints = pour.amount * LITERS_TO_PINTS;
-    let title = pour.isCurrent ? "Pouring!" : "Pour Finished!"
-    return (withinThreshold || pour.isCurrent) && !!pour && !!keg ? <div className="pour-overlay-wrapper">
+    const amountInPints = amount * LITERS_TO_PINTS;
+    const title = isCurrent ? "Pouring" : "Pour Finished";
+    return shouldShowPourOverlay ? <div className="pour-overlay-wrapper">
         <Overlay isOpen={true} usePortal={true} hasBackdrop={true}>
-            <div className={overlayClasses}>
+            <div className={classNames(Classes.CARD,
+        Classes.ELEVATION_4,
+        "overlay-container")}>
                 <div>
                     <p className="title">{title}</p>
                 </div>

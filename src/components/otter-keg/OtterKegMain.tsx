@@ -4,7 +4,7 @@ import { OtterKegState } from "../../state/OtterKegState";
 import { Spinner } from "@blueprintjs/core";
 import "../../styles/otter-keg/OtterKegMain.scss";
 import { KegWithDetails } from "../../types/KegWithDetails";
-import { PourOverlay } from "./PourOverlay";
+import { PourOverlayWrapper } from "./PourOverlayWrapper";
 import { KegStats } from "./KegStats";
 import { populateKegDetails } from "../../utils/untappedUtils";
 
@@ -37,6 +37,6 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                 })}
             </div>
         </div>
-        <PourOverlay />
+        <PourOverlayWrapper />
     </div> : <Spinner />
 })

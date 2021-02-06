@@ -26,11 +26,15 @@
         .status {
             font-size: 14px;
             line-height: 14px;
+            color: #D4AD5A
         }
 
         .volume {
             font-size: 14px;
             line-height: 14px;
         }
+    }
+    .drinker-active {
+        border:#D4AD5A solid 2px;
     }
 }

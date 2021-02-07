@@ -1,20 +1,16 @@
 @import "../../../node_modules/@blueprintjs/core/lib/scss/variables.scss";
 
 .board {
-    // border: 2px solid $pt-dark-divider-white;
     width: 15vw;
-    // height: 30vh;
     position: absolute;
     top: 80px;
     right: 5px;
     padding: 10px;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    // align-items: center;
-
-    background-color: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    background-color: $dark-gray2;
 
     .header {
         text-decoration: underline;

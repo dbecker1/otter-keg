@@ -17,12 +17,15 @@
     "firebase": "^8.1.1",
     "node-sass": "^4.14.1",
     "numeral": "^2.0.6",
+    "pure-react-carousel": "^1.27.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-redux-firebase": "^3.8.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
+    "react-virtualized": "^9.22.3",
+    "react-vis": "^1.11.7",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
@@ -52,5 +55,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-virtualized": "^9.21.11",
+    "@types/react-vis": "^1.11.5"
   }
 }

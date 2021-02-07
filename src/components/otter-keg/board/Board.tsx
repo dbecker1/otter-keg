@@ -61,10 +61,10 @@ export const Board = React.memo(function Board() {
                 "config/showLeaderboard": !shouldShowLeaderBoard
             })
         }
-        if (e.keyCode === 37 || e.keyCode === 39) {
+        if (e.keyCode === 38 || e.keyCode === 40) {
             let index = getActiveIndex(drinkers);
             let newIndex = index + 1;
-            if (e.keyCode === 37)
+            if (e.keyCode === 38)
                 newIndex = index - 1;
             if (newIndex >= 0 && newIndex < drinkers.length) {
                 let updates: any = {}
@@ -83,12 +83,20 @@ export const Board = React.memo(function Board() {
     })
     // TODO leader board
     return !!drinkers && !!pours ? <div className="board">
+        <p className="header">Literboard</p>
         {drinkers.map((drinker: any, index: any) => {
-            return <div className="drinker" key={index}>
-                <p className="name">{shouldShowLeaderBoard ? `${index + 1}. ${drinker.name}` : drinker.name}</p>
-                <p className="volume">{shouldShowLeaderBoard ? `Total: ${drinker.pourVolume.toFixed(2)} pints`: ""}</p>
-                <p className="status">{drinker.isActive ? "Selected": '\u00A0'}</p>
+            let literboardClass = shouldShowLeaderBoard ? "drinker-stretch": "drinker-center";
+            let activeClass = drinker.isActive ? "drinker-active": ""
+            return <div className={`drinker ${literboardClass} ${activeClass}`} key={index}>
+                <p className="name">{index + 1}. {drinker.name}</p>
+                {shouldShowLeaderBoard && 
+                    <p className="volume">{drinker.pourVolume.toFixed(2)} pints</p>
+                }
+                {/* <p className="status">{drinker.isActive ? "Selected": '\u00A0'}</p> */}
             </div>
         })}
+        <div className="board-footer">
+            <p>* Selected</p>
+        </div>
     </div> : <Spinner />
 })

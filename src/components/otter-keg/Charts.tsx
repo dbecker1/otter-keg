@@ -15,7 +15,7 @@ export const Charts = React.memo(function Charts() {
         queryParams: [ 'orderByChild=isCurrent', "equalTo=false" ],
     }]);
 
-    let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
+    // let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
     let poursRaw: any = useSelector((state: OtterKegState) => state.firebase.data.pours) ?? {};
 
     let chartData: any = {}

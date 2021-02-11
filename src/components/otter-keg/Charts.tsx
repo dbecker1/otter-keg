@@ -2,7 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { useFirebaseConnect } from "react-redux-firebase";
 import { OtterKegState } from "../../state/OtterKegState";
-import { IoLogoGameControllerA } from 'react-icons/Io'
+//import { IoLogoGameControllerA } from 'react-icons/Io'
 import "../../styles/otter-keg/Charts.scss";
 import { ComposedChart, ResponsiveContainer, Legend, XAxis , YAxis, Area, Label} from 'recharts';
 // import 'react-virtualized/styles.css';

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useFirebaseConnect } from "react-redux-firebase";
 import { OtterKegState } from "../../state/OtterKegState";
 import "../../styles/otter-keg/Charts.scss";
-import { ComposedChart, ResponsiveContainer, Legend, XAxis , YAxis, Area} from 'recharts';
+import { ComposedChart, ResponsiveContainer, Legend, XAxis , YAxis, Area, Label} from 'recharts';
 // import 'react-virtualized/styles.css';
 const LITERS_TO_PINTS = 2.11338;
 function getActiveIndex(drinkers: any[]): number {
@@ -13,8 +13,9 @@ function getActiveIndex(drinkers: any[]): number {
     }
     return -1;
 }
-
+let totalView: boolean = true;
 export const Charts = React.memo(function Charts() {
+    let [totalView, setTotalView] = React.useState(false);
     let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
     let drinkers = Object.keys(drinkersRaw).map((key, index) => {
         let drinker = {
@@ -34,8 +35,23 @@ export const Charts = React.memo(function Charts() {
 
     // let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
     let poursRaw: any = useSelector((state: OtterKegState) => state.firebase.data.pours) ?? {};
-
+    
     let newData: any = []
+
+    function keycheckTotal(e: any) {
+        console.log(e.KeyCode)
+        if (e.keyCode === 65) {
+            setTotalView(!totalView)
+        } 
+    }
+
+    React.useEffect(() => {
+        window.addEventListener("keydown", keycheckTotal);
+        return () => {
+            window.removeEventListener("keydown", keycheckTotal)
+        }
+    })
+
     function _isContains(json: any, value:any) {
         let contains = false;
         Object.keys(json).some(key => {
@@ -46,7 +62,7 @@ export const Charts = React.memo(function Charts() {
      }
     Object.keys(poursRaw).forEach((pourId) => {
         let pour = poursRaw[pourId];
-        if (pour["drinkerId"] === drinkers[getActiveIndex(drinkers)]["drinkerId"]) {
+        if (pour["drinkerId"] === drinkers[getActiveIndex(drinkers)]["drinkerId"] || totalView) {
         let date = new Date(pour["start"]);
         if (!_isContains(newData, date.toDateString())) {
             newData.push({'date': date.toDateString(), 'amount': pour['amount']*LITERS_TO_PINTS})
@@ -65,6 +81,7 @@ newData = newData.map( (x:any) => ({...x,"total":c+=x.amount}) )
     return  <div className="charts" >
         <ResponsiveContainer width="80%" height="80%">
             <ComposedChart data={newData}>
+            
                 <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
       <stop offset="5%" stopColor="#8884d8" stopOpacity={0.6}/>
@@ -77,8 +94,7 @@ newData = newData.map( (x:any) => ({...x,"total":c+=x.amount}) )
                 </defs>
                 {/* <CartesianGrid strokeDasharray="1 3" /> */}
             <YAxis></YAxis>
-            <XAxis dataKey="date"/>
-            {/* <YAxis /> */}
+            <XAxis dataKey="date"><Label value={totalView ? "Total (A)": "Drinker (A)"} position='top' style={{ textAnchor: 'middle', fontSize: '2em', padding: '40px', fill: 'rgba(200, 200, 200, 0.87)' }}/></XAxis>
             <Legend></Legend>
             <Area type="monotoneX" dataKey="total" animationEasing='ease-out' stroke="#8884d8" fillOpacity={.9} fill="url(#colorUv)" dot={true} label={renderLabel}>
                 </Area>

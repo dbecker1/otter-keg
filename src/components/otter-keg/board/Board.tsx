@@ -53,6 +53,7 @@ export const Board = React.memo(function Board() {
 
     function keycheck(e: any) {
         keySequence.push(e.keyCode);
+        console.log(e.keyCode)
         if (keySequence.length > 10) {
             keySequence = keySequence.slice(1);
         }

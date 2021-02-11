@@ -2,6 +2,7 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 import { useFirebaseConnect } from "react-redux-firebase";
 import { OtterKegState } from "../../state/OtterKegState";
+import { IoLogoGameControllerA } from 'react-icons/Io'
 import "../../styles/otter-keg/Charts.scss";
 import { ComposedChart, ResponsiveContainer, Legend, XAxis , YAxis, Area, Label} from 'recharts';
 // import 'react-virtualized/styles.css';
@@ -13,7 +14,6 @@ function getActiveIndex(drinkers: any[]): number {
     }
     return -1;
 }
-let totalView: boolean = true;
 export const Charts = React.memo(function Charts() {
     let [totalView, setTotalView] = React.useState(false);
     let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
@@ -94,7 +94,10 @@ newData = newData.map( (x:any) => ({...x,"total":c+=x.amount}) )
                 </defs>
                 {/* <CartesianGrid strokeDasharray="1 3" /> */}
             <YAxis></YAxis>
-            <XAxis dataKey="date"><Label value={totalView ? "Total (A)": "Drinker (A)"} position='top' style={{ textAnchor: 'middle', fontSize: '2em', padding: '40px', fill: 'rgba(200, 200, 200, 0.87)' }}/></XAxis>
+            <XAxis dataKey="date">
+            <Label value={totalView ? "Total": drinkers[getActiveIndex(drinkers)].name} position='top' offset = {30} style={{ textAnchor: 'middle', fontSize: '2em', padding: '40px', fill: 'rgba(200, 200, 200, 0.87)' }}></Label>
+            <Label value={"Use A to switch to ".concat(!totalView ? "Total": drinkers[getActiveIndex(drinkers)].name)} position='top' style={{ textAnchor: 'middle', fontSize: '1em', padding: '40px', marginTop:'1em', fill: 'rgba(200, 200, 200, 0.87)' }}/>
+            </XAxis>
             <Legend></Legend>
             <Area type="monotoneX" dataKey="total" animationEasing='ease-out' stroke="#8884d8" fillOpacity={.9} fill="url(#colorUv)" dot={true} label={renderLabel}>
                 </Area>

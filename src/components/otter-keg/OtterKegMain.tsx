@@ -4,7 +4,6 @@ import { OtterKegState } from "../../state/OtterKegState";
 import { Spinner } from "@blueprintjs/core";
 import "../../styles/otter-keg/OtterKegMain.scss";
 import { KegWithDetails } from "../../types/KegWithDetails";
-import { PourOverlayWrapper } from "./PourOverlayWrapper";
 import { KegStats } from "./KegStats";
 import { Charts } from "./Charts";
 
@@ -13,19 +12,21 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
     let [activePage, setActivePage] = React.useState(0);
     let activeKegs: KegWithDetails[] = useSelector((state: OtterKegState) => state.activeKegs) || {};
 
-    function keycheck(e: any) {
+    const keycheck = React.useCallback((e) => {
         if (e.keyCode === 37) {
             let newActivePage = activePage - 1;
             if (newActivePage < 0) 
                 newActivePage = NUM_PAGES - 1;
+            console.log(newActivePage);
             setActivePage(newActivePage);
         } else if (e.keyCode === 39) {
             let newActivePage = activePage + 1;
             if (newActivePage >= NUM_PAGES) 
                 newActivePage = 0;
+            console.log(newActivePage);
             setActivePage(newActivePage);
-        }
-    }
+        } 
+    }, [activePage, setActivePage])
 
     React.useEffect(() => {
         window.addEventListener("keydown", keycheck);
@@ -66,6 +67,5 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
             {activePage === 1 && 
                 <Charts />
             }
-        <PourOverlayWrapper />
     </div> : <Spinner />
 });

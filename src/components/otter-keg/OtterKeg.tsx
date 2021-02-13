@@ -2,6 +2,7 @@ import React from 'react'
 import { OtterKegHeader } from "./OtterKegHeader";
 import { OtterKegMain } from "./OtterKegMain";
 import { Board } from "./board/Board";
+import { PourOverlayWrapper } from "./PourOverlayWrapper";
 import "../../styles/otter-keg/OtterKeg.scss";
 
 export const OtterKeg = React.memo(function OtterKeg() {
@@ -13,6 +14,7 @@ export const OtterKeg = React.memo(function OtterKeg() {
                 <OtterKegMain />
             </div>
             <Board />
+            <PourOverlayWrapper />
         </React.Fragment>
         
     )

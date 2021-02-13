@@ -21,8 +21,9 @@ export const PourOverlayWrapper = React.memo(function PourOverlayWrapper() {
     const pour = pourRaw != null ? pourRaw[Object.keys(pourRaw)[0]] : undefined;
     const keg = pour != null ? kegs.filter((keg:KegWithDetails) => keg.kegId === pour.kegId)[0] : undefined;
     if (pour != null && keg != null) {
+        console.log(pour);
         return <PourOverlay pour={pour} keg={keg} />
     } else {
-        return <span style={{display: "none"}}>No Pour</span>;
+        return null;
     }
 })

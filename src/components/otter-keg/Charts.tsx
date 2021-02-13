@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
-import { useFirebaseConnect } from "react-redux-firebase";
 import { OtterKegState } from "../../state/OtterKegState";
 //import { IoLogoGameControllerA } from 'react-icons/Io'
 import "../../styles/otter-keg/Charts.scss";

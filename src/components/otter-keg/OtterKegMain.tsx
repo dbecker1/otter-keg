@@ -41,7 +41,8 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                         {activeKegs.map((keg, index) => {
                             return <div className="keg-details-col" key={index}>
                                 <p className="beer-title">{keg.beerDetails.beer_name}</p>
-                                <p>{keg.beerDetails.beer_style}<br />{keg.beerDetails.brewery.brewery_name}<br />{keg.beerDetails.beer_abv}% ABV, {keg.beerDetails.beer_ibu} IBU <br /> </p> 
+                                <p>{keg.beerDetails.beer_style}<br />{keg.beerDetails.brewery.brewery_name} | {keg.beerDetails.brewery.location.brewery_city}, {keg.beerDetails.brewery.location.brewery_state}
+                                <br />{keg.beerDetails.beer_abv}% ABV, {keg.beerDetails.beer_ibu} IBU <br /> </p> 
 
                             </div>
                         })}
@@ -50,7 +51,6 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                         {activeKegs.map((keg, index) => {
                             return <div className="keg-details-col" key={index}>
                                 <img className="beer-logo" src={keg.beerDetails.beer_label_hd || keg.beerDetails.beer_label} alt={keg.beerDetails.beer_name}/>
-                                <div><div className='marquee'><i className = 'scroll-left'>{keg.beerDetails.beer_description}</i></div></div>
                             </div>
                         })}
                     </div>

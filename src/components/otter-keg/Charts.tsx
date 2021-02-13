@@ -16,22 +16,23 @@ function getActiveIndex(drinkers: any[]): number {
 }
 export const Charts = React.memo(function Charts() {
     let [totalView, setTotalView] = React.useState(false);
+    //useFirebaseConnect("drinkers");
+    //useFirebaseConnect("pours");
     let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
-    let drinkers = Object.keys(drinkersRaw).map((key, index) => {
+    let drinkers = Object.keys(drinkersRaw).map((key) => {
         let drinker = {
             ...drinkersRaw[key]
         };
         drinker["drinkerId"] = key;
         return drinker
     })
-    console.log(drinkersRaw)
-    console.log(getActiveIndex(drinkers))
+
     //useFirebaseConnect("drinkers");
     // this probably isn't a good idea ¯\_(ツ)_/¯
-    useFirebaseConnect([{
+    /*useFirebaseConnect([{
         path: "pours", 
         queryParams: [ 'orderByChild=isCurrent', "equalTo=false" ],
-    }]);
+    }]);*/
 
     // let drinkersRaw: any = useSelector((state: OtterKegState) => state.firebase.data.drinkers) ?? {};
     let poursRaw: any = useSelector((state: OtterKegState) => state.firebase.data.pours) ?? {};

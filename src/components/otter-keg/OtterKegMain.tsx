@@ -43,7 +43,6 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                                 <p className="beer-title">{keg.beerDetails.beer_name}</p>
                                 <p>{keg.beerDetails.beer_style}<br />{keg.beerDetails.brewery.brewery_name} | {keg.beerDetails.brewery.location.brewery_city}, {keg.beerDetails.brewery.location.brewery_state}
                                 <br />{keg.beerDetails.beer_abv}% ABV, {keg.beerDetails.beer_ibu} IBU <br /> </p> 
-
                             </div>
                         })}
                     </div>
@@ -54,7 +53,6 @@ export const OtterKegMain = React.memo(function OtterKegMain() {
                             </div>
                         })}
                     </div>
-
                     <div className="keg-details-row footer">
                         {activeKegs.map((keg, index) => {
                             return <div className="keg-details-col" key={index}>

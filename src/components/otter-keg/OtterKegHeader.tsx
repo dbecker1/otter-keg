@@ -33,15 +33,15 @@ export const OtterKegHeader = React.memo(function OtterKegHeader() {
                             "10":["Sydney - G'day mate!"],
                             "11":["Magadan - Grab your sweater!"],
                             "12":["Auckland - Cheers!"]}
-        return timeToDrinkString += UTCOffsetList[UTCOffsetRequired][Math.floor(Math.random() * UTCOffsetList[UTCOffsetRequired].length)]
+         
+        timeToDrinkString += UTCOffsetList[UTCOffsetRequired][Math.floor(Math.random() * UTCOffsetList[UTCOffsetRequired].length)]
+        return timeToDrinkString
     }
-
     let [timeToDrinkString, setTimeToDrinkString] = React.useState(getTimeToDrinkCity());
-
     function callEveryHour() :any {
-        setInterval(() => setTimeToDrinkString(getTimeToDrinkCity()), 1000 * 60 * 60);
+        setInterval(() => setTimeToDrinkString(getTimeToDrinkCity()), 1000 * 60*60);
     }
-    var nextDate = (new Date());
+    var nextDate = new Date();
     if (nextDate.getMinutes() === 0) {
         callEveryHour()
     } else {
@@ -49,7 +49,6 @@ export const OtterKegHeader = React.memo(function OtterKegHeader() {
     nextDate.setMinutes(0);
     nextDate.setSeconds(0);
     var difference :number = nextDate.getTime() - (new Date()).getTime();
-    console.log(difference)
     setTimeout(callEveryHour(), difference);
     }
     return (

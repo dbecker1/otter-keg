@@ -4,8 +4,15 @@ import pbu from "../../assets/pbu_40_white.png";
 
 export const OtterKegHeader = React.memo(function OtterKegHeader() {
     function getTimeToDrinkCity(): string {
-        var currentHourUTC = (new Date()).getUTCHours()
-        var UTCOffsetRequired = ((currentHourUTC - 17) * -1).toString()
+        var currentTime = new Date()
+        var currentHourUTC = (currentTime).getUTCHours()
+        console.log(currentHourUTC)
+        var UTCOffsetRequired : string = '0'
+        if (currentHourUTC <= 5) {
+            UTCOffsetRequired = ((currentHourUTC + 7)*-1).toString()
+        } else {
+            UTCOffsetRequired = (17 - currentHourUTC).toString()
+        }
         var timeToDrinkString = "Its 5 O'Clock in "
         const UTCOffsetList: any = {
                             "-12":["Baker Island, USA"], 
@@ -33,12 +40,12 @@ export const OtterKegHeader = React.memo(function OtterKegHeader() {
                             "10":["Sydney - G'day mate!"],
                             "11":["Magadan - Grab your sweater!"],
                             "12":["Auckland - Cheers!"]}
-         
         timeToDrinkString += UTCOffsetList[UTCOffsetRequired][Math.floor(Math.random() * UTCOffsetList[UTCOffsetRequired].length)]
         return timeToDrinkString
     }
-    let [timeToDrinkString, setTimeToDrinkString] = React.useState(getTimeToDrinkCity());
+    let [FiveOClockString, setTimeToDrinkString] = React.useState(getTimeToDrinkCity());
     function callEveryHour() :any {
+        console.log('changing header')
         setInterval(() => setTimeToDrinkString(getTimeToDrinkCity()), 1000 * 60*60);
     }
     var nextDate = new Date();
@@ -54,7 +61,7 @@ export const OtterKegHeader = React.memo(function OtterKegHeader() {
     return (
         <div className="otter-keg-header">
             <span>Otter Keg</span>
-            <h3>{timeToDrinkString}</h3>
+            <h3>{FiveOClockString}</h3>
             <img src={pbu} alt={"Powered by Untappd"} />
         </div>
         );
